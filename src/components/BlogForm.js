@@ -1,9 +1,9 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 
-export default function BlogForm({ blog,onSubmit }) {
-    const [title, setTitle] = useState('')
-    const [content, setContent] = useState('')
+export default function BlogForm({ blog,onSubmit, initialValues }) {
+    const [title, setTitle] = useState(initialValues.title)
+    const [content, setContent] = useState(initialValues.content)
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Başlık :</Text>
