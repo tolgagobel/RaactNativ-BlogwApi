@@ -1,14 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Context } from '../context/BlogContext'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function IndexScreen({navigation}) {
-    const { state, getBlogs } = useContext(Context)
+    const { state, getBlogs, deleteBlog } = useContext(Context)
+    const [intervalId, setIntervalId] = useState(null);
 
     useEffect(() => {
         getBlogs();
-    }, []);
+
+        const id = setInterval(() => {
+            getBlogs();
+        }, 100);
+
+        setIntervalId(id);
+
+        return () => clearInterval(intervalId);
+      }, []);
     return (
         <SafeAreaView>
             <View style={styles.container}>
@@ -22,8 +31,8 @@ export default function IndexScreen({navigation}) {
                                     <Text style={styles.button_title}>{item.title}</Text>
                                 </View>
                                 <View>
-                                    <TouchableOpacity>
-                                        <Icon name="trash" size={20} style={styles.trash} />
+                                    <TouchableOpacity onPress={() => deleteBlog(item.id)}>
+                                        <FontAwesome name="trash" size={20} style={styles.trash} />
                                     </TouchableOpacity>
                                 </View>
                             </TouchableOpacity>
