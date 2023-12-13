@@ -7,7 +7,7 @@ export default function CreateScreen({navigation}) {
     const { addBlogs } = useContext(Context)
     return (
         <SafeAreaView>
-            <BlogForm onSubmit={(title, content) => { addBlogs(title, content, () => navigation.navigate('Index')) }} />
+            <BlogForm isVisible={true} onSubmit={(title, content) => { addBlogs(title, content, () => navigation.navigate('Index')) }} />
         </SafeAreaView>
     )
 }

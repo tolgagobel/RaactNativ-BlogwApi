@@ -1,9 +1,9 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 
-export default function BlogForm({ blog,onSubmit, initialValues }) {
-    const [title, setTitle] = useState(initialValues.title)
-    const [content, setContent] = useState(initialValues.content)
+export default function BlogForm({ blog,onSubmit, initialValues, isVisible }) {
+    const [title, setTitle] = useState(initialValues ? initialValues.title : '')
+    const [content, setContent] = useState(initialValues ? initialValues.content : '')
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Başlık :</Text>
@@ -12,7 +12,7 @@ export default function BlogForm({ blog,onSubmit, initialValues }) {
             <TextInput style={styles.content} value={content} onChangeText={(text) => setContent(text)}/>
             <TouchableOpacity style={styles.button_container} onPress={() => onSubmit(title,content)}>
                 <View style={styles.button_body}>
-                    <Text style={styles.button_title}>Kaydet</Text>
+                    <Text style={styles.button_title}>{isVisible ? 'Kaydet' : 'Güncelle'}</Text>
                 </View>
             </TouchableOpacity>
 
